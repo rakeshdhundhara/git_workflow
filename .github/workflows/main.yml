@@ -3,10 +3,6 @@ on:
   workflow_dispatch:
     inputs:
       var1:
-        description: 'Action to perform (apply or destroy)'
-        required: true
-        default: 'apply'
-
   push:
     branches:
       - main
