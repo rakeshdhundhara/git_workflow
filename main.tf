@@ -5,7 +5,7 @@ resource "newrelic_synthetics_script_monitor" "monitor" {
   locations_public = var.synthetic.locations_public
   period           = var.synthetic.period
 
-  script = file("C:\\Users\\RakeshKumar\\Terraform_task\\files\\script.js")
+  script = "console.log('hello')"
 
   script_language      = var.synthetic.script_language
   runtime_type         = var.synthetic.runtime_type
