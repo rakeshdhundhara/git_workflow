@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+     paths:
+          - '.github/workflows/apply.yml'
 jobs:
   terraform_apply:
     name: Terraform Apply
