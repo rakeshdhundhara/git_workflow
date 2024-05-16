@@ -1,10 +1,12 @@
 name: Terraform Apply and Destroy
 on:
-  workflow_dispatch: 
-   inputs:
+  workflow_dispatch:
+    inputs:
       var1:
-        
-          
+        description: 'Action to perform (apply or destroy)'
+        required: true
+        default: 'apply'
+
   push:
     branches:
       - main
@@ -34,10 +36,6 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}"
 
-      - name: Terraform Apply
-        if: github.event.inputs.var1 == 'apply'
-        run: terraform apply -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}" -auto-approve
-
-      - name: Terraform Destroy
-        if: github.event.inputs.var1 == 'destroy'
-        run: terraform destroy -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}" -auto-approve
+      - name: Terraform Apply or Destroy
+        if: github.event_name == 'workflow_dispatch'
+        run: terraform ${GITHUB_EVENT_INPUTS_VAR1} -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}" -auto-approve
