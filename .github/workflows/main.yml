@@ -3,7 +3,7 @@ on:
   workflow_dispatch: 
    inputs:
       destroy:
-           required: true
+          
   push:
     branches:
       - main
