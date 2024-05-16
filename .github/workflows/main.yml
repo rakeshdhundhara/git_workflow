@@ -1,6 +1,9 @@
 name: Terraform Deployment
 on:
-  workflow_dispatch:  
+  workflow_dispatch: 
+   inputs:
+      apply_or_destroy:
+           required: true
   push:
     branches:
       - main
@@ -35,5 +38,5 @@ jobs:
         run: terraform apply -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}" -auto-approve
 
       - name: Terraform Destroy
-
+        if: github.event.inputs.apply_or_destroy == 'destroy'
         run: terraform destroy -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}" -auto-approve
