@@ -1,11 +1,8 @@
 name: Terraform Deployment
-
 on:
   push:
     branches:
       - main
-  workflow_dispatch:   # Manual trigger
-
 jobs:
   terraform_apply:
     name: Terraform Apply
