@@ -39,5 +39,5 @@ jobs:
         run: terraform plan -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}"
 
       - name: Terraform Apply or Destroy
-        if: github.event_name == 'workflow_dispatch'
+        # if: github.event_name == 'workflow_dispatch'
         run: terraform ${{ github.event.inputs.action }} -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}" -auto-approve
