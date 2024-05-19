@@ -27,7 +27,7 @@ jobs:
           terraform_version: 1.0.0
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -reconfigure -backend-config="bucket=${{ env.BUCKET }}" -backend-config="key=${{ env.TFSTATE_FILE }}" -backend-config="region=${{ env.aws_region }}" -input=false 
       
       - name: Terraform Plan
         run: terraform plan -var="NEWRELIC_ACCOUNT_ID=${{ secrets.NEWRELIC_ACCOUNT_ID }}" -var="NEWRELIC_API_KEY=${{ secrets.NEWRELIC_API_KEY }}"
